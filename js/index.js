@@ -42,6 +42,8 @@ const loadNewsCategory = (category_id) => {
     });
 };
 
+loadNewsCategory(8);
+
 const displayNewsCategory = (data) => {
   const newList = document.getElementById("show-news");
   newList.innerHTML = ``;

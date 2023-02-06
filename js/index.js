@@ -59,20 +59,23 @@ const displayNewsCategory = (data) => {
                     <p>${item.details.slice(0, 250) + "..."}</p>
                 </div>
                 
-                <div class='d-flex justify-content-between'>
+                <div class='d-flex justify-content-between align-items-center'>
                     <div class='d-flex'>
                         <div>
-                            <img width='40' height='40' style='border-radius:50%' src='${
+                            <img class='mt-1' width='40' height='40' style='border-radius:50%' src='${
                               item.author ? item.author.img : "Not Available"
                             }'>
                         </div>
                         <div class='ms-2'>
-                            ${item.author ? item.author.name : "Not Available"}
-                            ${
+                            <p class='mb-0'>${
+                              item.author ? item.author.name : "Not Available"
+                            }</p>
+                            <p class='mb-0'>${
                               item.author.published_date
                                 ? item.author.published_date
                                 : "Not Available"
-                            }
+                            }</p>
+                            
                         </div>
                     </div>
                     <div>
@@ -82,6 +85,9 @@ const displayNewsCategory = (data) => {
                     </div>
                     <div>
                         <p>${item.rating.number}</p>
+                    </div>
+                    <div>
+                    <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
             </div>

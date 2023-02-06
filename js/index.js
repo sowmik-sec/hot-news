@@ -25,7 +25,7 @@ const displayCategories = (categories) => {
 };
 
 const clickHandleNews = (category_id) => {
-  console.log(category_id);
+  //console.log(category_id);
   loadNewsCategory(category_id);
 };
 
@@ -46,7 +46,7 @@ const displayNewsCategory = (data) => {
   const newList = document.getElementById("show-news");
   newList.innerHTML = ``;
   data.forEach((item) => {
-    console.log(item);
+    //console.log(item);
     const newsDiv = document.createElement("div");
     newsDiv.innerHTML = `
         <div class='d-flex justify-content-between mb-5'>
@@ -87,7 +87,10 @@ const displayNewsCategory = (data) => {
                         <p>${item.rating.number}</p>
                     </div>
                     <div>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <button onclick="handleShowDetail('${
+                      item._id
+                    }')" id='btn-show-detail' class='btn' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i></button>
+                    
                     </div>
                 </div>
             </div>
@@ -95,6 +98,19 @@ const displayNewsCategory = (data) => {
     `;
     newList.appendChild(newsDiv);
   });
+};
+
+const handleShowDetail = (id) => {
+  //   console.log(id);
+  fetch(` https://openapi.programming-hero.com/api/news/${id}`)
+    .then((res) => res.json())
+    .then((data) => displaySingleNews(data.data[0]));
+};
+
+const displaySingleNews = (data) => {
+  //console.log(data.title);
+  document.getElementById("title-news").innerText = data.title;
+  document.getElementById("main-news").innerText = data.details;
 };
 
 document.getElementById("blog").addEventListener("click", function () {

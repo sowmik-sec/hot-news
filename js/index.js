@@ -64,7 +64,7 @@ const displayNewsCategory = (data) => {
     //console.log(item);
     const newsDiv = document.createElement("div");
     newsDiv.innerHTML = `
-        <div class='d-flex justify-content-between mb-5'>
+        <div class='d-flex justify-content-between mb-5 bg-white p-3 rounded'>
             <div>
                 <img height='244' src='${item.image_url}'>
             </div>

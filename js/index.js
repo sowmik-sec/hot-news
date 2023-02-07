@@ -74,6 +74,21 @@ const displayNewsCategory = (data, newsCategoryName) => {
     newsCategoryName ? newsCategoryName : "All Category"
   }</p>`;
   newList.innerHTML = ``;
+  console.log("fuck");
+  data.sort((x, y) => {
+    console.log(x.total_view, y.total_view);
+    if (x.total_view == null) {
+      x.total_view = 0;
+    }
+    if (y.total_view == null) {
+      y.total_view = 0;
+    }
+    if (parseInt(x.total_view) > parseInt(y.total_view)) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
   data.forEach((item) => {
     //console.log(item);
     const newsDiv = document.createElement("div");

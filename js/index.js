@@ -18,6 +18,10 @@ const displayCategories = (categories) => {
   //console.log(categories);
   categories.forEach((category) => {
     const catDiv = document.createElement("div");
+    // new nav start
+
+    // new nav end
+    // previous nav start
     catDiv.innerHTML = `<button id='${
       category.category_name
     }' onclick='clickHandleNews(${category.category_id}, "${
@@ -25,21 +29,22 @@ const displayCategories = (categories) => {
     }", ${JSON.stringify(categories)})' class='btn fs-5'>${
       category.category_name
     }</button>`;
+    // previous nav end
     //console.log(category);
     newsCategory.appendChild(catDiv);
   });
 };
 
-const clickHandleNews = (category_id, newsId, categories) => {
-  //console.log(category_id);
-  console.log(categories);
+const clickHandleNews = (category_id, newsCategoryName, categories) => {
+  //console.log(newsId);
+  //console.log(categories);
   displayCategories(categories);
-  document.getElementById(newsId).style.color = "blue";
+  document.getElementById(newsCategoryName).style.color = "blue";
   //document.getElementById(newsId).classList.add("active");
-  loadNewsCategory(category_id);
+  loadNewsCategory(category_id, newsCategoryName);
 };
 
-const loadNewsCategory = (category_id) => {
+const loadNewsCategory = (category_id, newsCategoryName) => {
   document.getElementById("spinner").classList.remove("d-none");
 
   fetch(
@@ -48,7 +53,7 @@ const loadNewsCategory = (category_id) => {
     }`
   )
     .then((res) => res.json())
-    .then((data) => displayNewsCategory(data.data))
+    .then((data) => displayNewsCategory(data.data, newsCategoryName))
     .catch((error) => {
       console.log(error);
     });
@@ -56,9 +61,18 @@ const loadNewsCategory = (category_id) => {
 
 loadNewsCategory(8);
 
-const displayNewsCategory = (data) => {
+const displayNewsCategory = (data, newsCategoryName) => {
   document.getElementById("spinner").classList.add("d-none");
   const newList = document.getElementById("show-news");
+  const itemCount = document.getElementById("item-count");
+  itemCount.style.backgroundColor = "white";
+  itemCount.classList.add("text-center");
+  itemCount.classList.add("fs-4");
+  itemCount.classList.add("py-2");
+  itemCount.innerHTML = ``;
+  itemCount.innerHTML = `<p>${data.length}  items found for category ${
+    newsCategoryName ? newsCategoryName : "All Category"
+  }</p>`;
   newList.innerHTML = ``;
   data.forEach((item) => {
     //console.log(item);

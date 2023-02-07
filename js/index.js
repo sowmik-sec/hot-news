@@ -14,18 +14,28 @@ const loadCategories = async () => {
 
 const displayCategories = (categories) => {
   const newsCategory = document.getElementById("category");
-
+  newsCategory.innerHTML = ``;
+  //console.log(categories);
   categories.forEach((category) => {
     const catDiv = document.createElement("div");
-    //catDiv.innerHTML = `<a onclick='clickHandlerNews()' class="text-decoration-none text-dark fs-5 me-3" href="">${category.category_name}</a>`;
-    catDiv.innerHTML = `<button onclick='clickHandleNews(${category.category_id})' class='btn fs-5'>${category.category_name}</button>`;
+    catDiv.innerHTML = `<button id='${
+      category.category_name
+    }' onclick='clickHandleNews(${category.category_id}, "${
+      category.category_name
+    }", ${JSON.stringify(categories)})' class='btn fs-5'>${
+      category.category_name
+    }</button>`;
     //console.log(category);
     newsCategory.appendChild(catDiv);
   });
 };
 
-const clickHandleNews = (category_id) => {
+const clickHandleNews = (category_id, newsId, categories) => {
   //console.log(category_id);
+  console.log(categories);
+  displayCategories(categories);
+  document.getElementById(newsId).style.color = "blue";
+  //document.getElementById(newsId).classList.add("active");
   loadNewsCategory(category_id);
 };
 

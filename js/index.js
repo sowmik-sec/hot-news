@@ -40,6 +40,8 @@ const clickHandleNews = (category_id, newsId, categories) => {
 };
 
 const loadNewsCategory = (category_id) => {
+  document.getElementById("spinner").classList.remove("d-none");
+
   fetch(
     `https://openapi.programming-hero.com/api/news/category/${
       "0" + category_id
@@ -55,6 +57,7 @@ const loadNewsCategory = (category_id) => {
 loadNewsCategory(8);
 
 const displayNewsCategory = (data) => {
+  document.getElementById("spinner").classList.add("d-none");
   const newList = document.getElementById("show-news");
   newList.innerHTML = ``;
   data.forEach((item) => {

@@ -158,11 +158,16 @@ const displaySingleNews = (data) => {
 };
 
 document.getElementById("blog").addEventListener("click", function () {
+  document.getElementById("blog").style.color = "blue";
+  document.getElementById("news").style.color = "black";
   document.getElementById("blog-section").classList.remove("d-none");
   document.getElementById("news-section").classList.add("d-none");
 });
 
 document.getElementById("news").addEventListener("click", function () {
+  document.getElementById("blog").style.color = "black";
+  document.getElementById("news").style.color = "blue";
+
   document.getElementById("blog-section").classList.add("d-none");
   document.getElementById("news-section").classList.remove("d-none");
 });

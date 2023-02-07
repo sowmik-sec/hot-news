@@ -93,9 +93,9 @@ const displayNewsCategory = (data, newsCategoryName) => {
     //console.log(item);
     const newsDiv = document.createElement("div");
     newsDiv.innerHTML = `
-        <div class='d-flex justify-content-between mb-5 bg-white p-3 rounded'>
+        <div class='d-flex justify-content-lg-between flex-lg-row flex-column mb-5 bg-white p-3 rounded'>
             <div>
-                <img height='244' src='${item.image_url}'>
+                <img height='244' width='350' src='${item.image_url}'>
             </div>
             <div class='p-2 ms-2 d-flex flex-column justify-content-between'>
                 <div class='mb-2'>

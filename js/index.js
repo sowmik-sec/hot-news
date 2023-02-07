@@ -61,6 +61,43 @@ const loadNewsCategory = (category_id, newsCategoryName) => {
 
 loadNewsCategory(8);
 
+const sortNews = (data, sortId) => {
+  //const sortId = document.getElementById(sortId);
+  //if (sortId === "high-low") {
+  if (sortId === "high-low") {
+    document.getElementById("default-id").innerText = "View(High to Low)";
+  } else {
+    document.getElementById("default-id").innerText = "View(Low to High)";
+  }
+
+  data.sort((x, y) => {
+    if (x.total_view == null) {
+      x.total_view = 0;
+    }
+    if (y.total_view == null) {
+      y.total_view = 0;
+    }
+    if (
+      parseInt(x.total_view) > parseInt(y.total_view) &&
+      sortId === "high-low"
+    ) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  console.log("inside sort function");
+  return data;
+  //}
+};
+
+document.getElementById("high-low").addEventListener("click", function () {
+  data = sortNews(data, "high-low");
+});
+document.getElementById("low-high").addEventListener("click", function () {
+  data = sortNews(data, "low-high");
+});
+
 const displayNewsCategory = (data, newsCategoryName) => {
   document.getElementById("spinner").classList.add("d-none");
   const newList = document.getElementById("show-news");
@@ -74,21 +111,23 @@ const displayNewsCategory = (data, newsCategoryName) => {
     newsCategoryName ? newsCategoryName : "All Category"
   }</p>`;
   newList.innerHTML = ``;
-  console.log("fuck");
-  data.sort((x, y) => {
-    console.log(x.total_view, y.total_view);
-    if (x.total_view == null) {
-      x.total_view = 0;
-    }
-    if (y.total_view == null) {
-      y.total_view = 0;
-    }
-    if (parseInt(x.total_view) > parseInt(y.total_view)) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
+  //console.log("fuck");
+  data = sortNews(data, "high-low");
+
+  //   data.sort((x, y) => {
+  //     //console.log(x.total_view, y.total_view);
+  //     if (x.total_view == null) {
+  //       x.total_view = 0;
+  //     }
+  //     if (y.total_view == null) {
+  //       y.total_view = 0;
+  //     }
+  //     if (parseInt(x.total_view) > parseInt(y.total_view)) {
+  //       return -1;
+  //     } else {
+  //       return 1;
+  //     }
+  //   });
   data.forEach((item) => {
     //console.log(item);
     const newsDiv = document.createElement("div");
